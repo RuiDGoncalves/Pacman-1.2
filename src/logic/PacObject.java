@@ -53,18 +53,4 @@ public class PacObject {
 	}
 	
 	
-	//Procura a matriz por algum pacdot
-	public boolean SearchPacdot(char maze[][]){
-		for ( int i = 1; i < maze.length-1; i++ )
-		{
-			for( int j = 1; j < maze[i].length-1; j++ )
-			{
-				if ( maze[i][j] == 'D' )
-					return true;
-			}		
-		}
-		
-		return false;
-	}	
-	
 }

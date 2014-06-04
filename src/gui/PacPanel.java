@@ -32,6 +32,7 @@ public class PacPanel extends JPanel implements KeyListener {
 	
 	PacFrame frame;
 	
+	int vidas = 3;
 	boolean estado;
 	
 	public PacPanel(PacFrame pacframe){
@@ -170,7 +171,7 @@ public class PacPanel extends JPanel implements KeyListener {
 		
 		//Object[] options = { "Okay :(", "I will never surrender!" };
 		int keycode = e.getKeyCode();
-
+			
 		if (keycode == KeyEvent.VK_UP || keycode == KeyEvent.VK_W){
 			game.MovePacman(-1, 0);
 			game.MoveGhost();
@@ -193,16 +194,23 @@ public class PacPanel extends JPanel implements KeyListener {
 		}
 		
 		if ( game.SamePosition() ){
+			vidas--;
+		}
+			
+		if ( game.SamePosition() &&  vidas == 0 ){
 			JOptionPane.showMessageDialog(null, null, "GAMEOVER", JOptionPane.INFORMATION_MESSAGE, Gameover);
 			estado = true;
 	        frame.setSize(1150, 650);
+			remove(frame.lives);
+			remove(frame.score);
+			remove(frame.pacdots);
 	        frame.ButtonsFunctions();
 	        frame.setLocationRelativeTo(null);
 		}
 		
 		validate();
-		repaint();
-
+		repaint();		
+		
 	}
 
 	@Override

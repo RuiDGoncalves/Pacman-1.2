@@ -10,18 +10,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 
 public class PacFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	public PacPanel panel;
-	public JButton play;
-	public JButton options;
-	public JButton exit;
+	public JLabel lives, score, pacdots;
+	public JButton play, options, exit;
 	
 	public PacFrame(){		
 		
 		panel = new PacPanel(this);
+		lives = new JLabel("LIVES: " + panel.game.LifeCounter());
+		score = new JLabel("SCORE: ");
+		pacdots = new JLabel("PACDOTS LEFT: ");
 		
 		setTitle("PacMan");
 		setSize(1150, 650);
@@ -31,8 +34,34 @@ public class PacFrame extends JFrame {
 		ButtonsFunctions();
 		
 		panel.setLayout(null);
+		
 		add(panel);
+		validate();
 				
+	}
+	
+	
+	public void SetLabels(){
+		//lives = new JLabel("LIVES: ");
+		lives.setLocation(0, 0);
+		lives.setSize(100, 34);
+		lives.setHorizontalAlignment(0);
+		lives.setForeground(Color.RED);
+        panel.add(lives);
+        
+        
+        score.setLocation(305, 0);
+        score.setSize(100, 34);
+        score.setHorizontalAlignment(0);
+        score.setForeground(Color.RED);
+        panel.add(score);
+        
+        
+        pacdots.setLocation(565, 0);
+        pacdots.setSize(100, 34);
+        pacdots.setHorizontalAlignment(0);
+        pacdots.setForeground(Color.RED);
+        panel.add(pacdots);
 	}
 	
 	
@@ -69,10 +98,11 @@ public class PacFrame extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			panel.BeginGame();
-			setSize(730, 732);
+			setSize(730, 732); //width, height
 			panel.remove(play);
 			panel.remove(options);
 			panel.remove(exit);
+			SetLabels();
 			add(panel);
 		}
 	}

@@ -10,6 +10,9 @@ public class PacWorld {
 	public PacSpecialDot lsd1, lsd2, lsd3, lsd4;
 	public PacGhost ghost;
 	
+	int vidas = 3;
+	
+	
 	public PacWorld(){
 		char maze[][] = {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' },
 						 {'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X' },
@@ -48,6 +51,8 @@ public class PacWorld {
 		lsd2.SetSymbol(pacmaze);
 		lsd3.SetSymbol(pacmaze);
 		lsd4.SetSymbol(pacmaze);
+		pacman.SetSymbol(pacmaze);
+		ghost.SetSymbol(pacmaze);
 	}
 	
 	
@@ -167,19 +172,26 @@ public class PacWorld {
 		else 
 			return false;
 	}
-			
+	
+	
+	
+	//
+	//Contadores para as JLabels
+	//
+	
+	//Contador de vidas
+	public int LifeCounter(){
+		
+		if ( SamePosition() )
+			vidas = vidas - 1;
+		
+		return vidas;
+	}
+
 			
 	
 	//Esta é a funcao principal da classe. Recebe input do utilizador e efectua os movimentos necessarios
 	public void PacPlay(){
-		
-		SetPacdots(pacmaze);
-		pacman.SetSymbol(pacmaze);
-		lsd1.SetSymbol(pacmaze);
-		lsd2.SetSymbol(pacmaze);
-		lsd3.SetSymbol(pacmaze);
-		lsd4.SetSymbol(pacmaze);
-		ghost.SetSymbol(pacmaze);
 		
 		while ( SearchPacdot(pacmaze) == true ){
 			
