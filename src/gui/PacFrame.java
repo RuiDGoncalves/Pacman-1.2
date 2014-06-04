@@ -16,6 +16,8 @@ public class PacFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public PacPanel panel;
 	public JButton play;
+	public JButton options;
+	public JButton exit;
 	
 	public PacFrame(){		
 		
@@ -36,9 +38,19 @@ public class PacFrame extends JFrame {
 	
 	public void SetButtons(){		
 		play = new JButton("Play");
-		play.setBounds(500, 40, 150, 50);
-		play.setBackground(Color.YELLOW);
-		play.setForeground(Color.GRAY);
+		play.setBounds(420, 74, 150, 50);
+		play.setBackground(Color.BLUE);
+		play.setForeground(Color.BLACK);
+		
+		options = new JButton("Options");
+		options.setBounds(520, 280, 150, 50);
+		options.setBackground(Color.YELLOW);
+		options.setForeground(Color.BLACK);
+		
+		exit = new JButton("Exit");
+		exit.setBounds(620, 479, 150, 50);
+		exit.setBackground(Color.RED);
+		exit.setForeground(Color.BLACK);
 	}
 	
 	
@@ -46,6 +58,8 @@ public class PacFrame extends JFrame {
 		SetButtons();		
 		play.addActionListener(new BPlay());
 		panel.add(play);
+		panel.add(options);
+		panel.add(exit);
 		
 	}	
 
@@ -57,6 +71,8 @@ public class PacFrame extends JFrame {
 			panel.BeginGame();
 			setSize(730, 732);
 			panel.remove(play);
+			panel.remove(options);
+			panel.remove(exit);
 			add(panel);
 		}
 	}

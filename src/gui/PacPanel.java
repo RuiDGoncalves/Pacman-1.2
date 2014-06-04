@@ -217,6 +217,7 @@ public class PacPanel extends JPanel implements KeyListener {
 	//Funcao que muda o Wallpaper inicial para o jogo.
 	public void BeginGame(){
 		estado = false;
+		repaint();
 		setRequestFocusEnabled(true);
 		requestFocus();
 	}
