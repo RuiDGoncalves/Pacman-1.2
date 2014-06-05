@@ -10,8 +10,8 @@ public class PacWorld {
 	public PacSpecialDot lsd1, lsd2, lsd3, lsd4;
 	public PacGhost ghost;
 	
-	int vidas = 3;
-	
+	char[][] maze_temp;
+	public int dots_count;
 	
 	public PacWorld(){
 		char maze[][] = {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' },
@@ -57,13 +57,13 @@ public class PacWorld {
 	
 	
 	//Faz display da matriz de jogo original
-	public void DisplayPacworld()
+	public void DisplayPacworld(char maze[][])
 	{
-		for ( int i = 0; i < pacmaze.length; i++ ){
-			for( int j = 0; j < pacmaze[i].length; j++ ){
-				System.out.print(pacmaze[i][j]);
+		for ( int i = 0; i < maze.length; i++ ){
+			for( int j = 0; j < maze[i].length; j++ ){
+				System.out.print(maze[i][j]);
 
-				if ( j != ( pacmaze[i].length - 1) )
+				if ( j != ( maze[i].length - 1) )
 					System.out.print(" ");
 			}
 			System.out.println("");
@@ -96,15 +96,6 @@ public class PacWorld {
 		}
 			
 		return false;
-	}
-	
-	
-	//Funçao que retorna o pacmaze já com os objetos
-	public char[][] NewPacmaze(){
-		pacman.SetSymbol(pacmaze);
-		ghost.SetSymbol(pacmaze);
-		DisplayPacworld();
-		return pacmaze;
 	}
 	
 	
@@ -182,20 +173,37 @@ public class PacWorld {
 	//Contador de vidas
 	public int LifeCounter(){
 		
+		int vidas = 3;
+		
 		if ( SamePosition() )
 			vidas = vidas - 1;
 		
 		return vidas;
 	}
+	
+	//Contador de pacdots
+	public int PacdotCounter(char[][] maze){
+		
+		for ( int i = 1; i < maze.length-1; i++ )
+		{
+			for( int j = 1; j < maze[i].length-1; j++ )
+			{
+				if ( (maze[i][j] == dots.symbol) || (maze[i][j] == lsd1.symbol) )
+					dots_count++;
+			}		
+		}
+			
+		return dots_count;
+	}
 
 			
 	
 	//Esta é a funcao principal da classe. Recebe input do utilizador e efectua os movimentos necessarios
-	public void PacPlay(){
+	public char[][] PacPlay(){
 		
 		while ( SearchPacdot(pacmaze) == true ){
 			
-			DisplayPacworld();
+			DisplayPacworld(pacmaze);
 		
 			Scanner in = new Scanner(System.in);
 			System.out.println("Faz jogada: ");
@@ -225,12 +233,15 @@ public class PacWorld {
 			}
 			
 			MoveGhost();
-			MovePacman(x, y);			
+			MovePacman(x, y);
 			
 		}
 		
-		DisplayPacworld();
+		DisplayPacworld(pacmaze);
+		
+		return pacmaze;
 
 	}
+	
 }
 

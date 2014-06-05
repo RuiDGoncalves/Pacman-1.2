@@ -16,15 +16,11 @@ public class PacFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	public PacPanel panel;
-	public JLabel lives, score, pacdots;
 	public JButton play, options, exit;
 	
 	public PacFrame(){		
 		
 		panel = new PacPanel(this);
-		lives = new JLabel("LIVES: " + panel.game.LifeCounter());
-		score = new JLabel("SCORE: ");
-		pacdots = new JLabel("PACDOTS LEFT: ");
 		
 		setTitle("PacMan");
 		setSize(1150, 650);
@@ -38,30 +34,6 @@ public class PacFrame extends JFrame {
 		add(panel);
 		validate();
 				
-	}
-	
-	
-	public void SetLabels(){
-		//lives = new JLabel("LIVES: ");
-		lives.setLocation(0, 0);
-		lives.setSize(100, 34);
-		lives.setHorizontalAlignment(0);
-		lives.setForeground(Color.RED);
-        panel.add(lives);
-        
-        
-        score.setLocation(305, 0);
-        score.setSize(100, 34);
-        score.setHorizontalAlignment(0);
-        score.setForeground(Color.RED);
-        panel.add(score);
-        
-        
-        pacdots.setLocation(565, 0);
-        pacdots.setSize(100, 34);
-        pacdots.setHorizontalAlignment(0);
-        pacdots.setForeground(Color.RED);
-        panel.add(pacdots);
 	}
 	
 	
@@ -102,7 +74,6 @@ public class PacFrame extends JFrame {
 			panel.remove(play);
 			panel.remove(options);
 			panel.remove(exit);
-			SetLabels();
 			add(panel);
 		}
 	}

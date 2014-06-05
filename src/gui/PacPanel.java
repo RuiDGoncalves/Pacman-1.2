@@ -31,6 +31,7 @@ public class PacPanel extends JPanel implements KeyListener {
 	PacWorld game;
 	
 	PacFrame frame;
+	public JLabel lives, score, pacdots;
 	
 	int vidas = 3;
 	boolean estado;
@@ -40,9 +41,35 @@ public class PacPanel extends JPanel implements KeyListener {
 		frame = pacframe;
 		estado = true;
 		game = new PacWorld();
+		
 		LoadImages();
+		SetLabels();
 		addKeyListener(this);
 		
+	}
+	
+	
+	public void SetLabels(){
+		//lives = new JLabel("LIVES: ");
+		lives.setLocation(0, 0);
+		lives.setSize(100, 34);
+		lives.setHorizontalAlignment(0);
+		lives.setForeground(Color.RED);
+        add(lives);
+        
+        
+        score.setLocation(305, 0);
+        score.setSize(100, 34);
+        score.setHorizontalAlignment(0);
+        score.setForeground(Color.RED);
+        add(score);
+        
+        
+        pacdots.setLocation(565, 0);
+        pacdots.setSize(100, 34);
+        pacdots.setHorizontalAlignment(0);
+        pacdots.setForeground(Color.RED);
+        add(pacdots);
 	}
 	
 	//Funçao que carrega as imagens necessarias para o jogo
@@ -96,6 +123,9 @@ public class PacPanel extends JPanel implements KeyListener {
 		else {
 			PaintMaze(g2);
 			PaintObjects(g2);
+			lives = new JLabel("LIVES: " + game.LifeCounter());
+			score = new JLabel("SCORE: "+ (game.PacdotCounter(game.PacPlay()) * 100));
+			pacdots = new JLabel("PACDOTS LEFT: ");
 		}		
 	}
 	
@@ -145,7 +175,7 @@ public class PacPanel extends JPanel implements KeyListener {
 	
 	public void PaintObjects(Graphics2D g2){
 		
-		char maze[][] = game.NewPacmaze();
+		char maze[][] = game.pacmaze;
 		
 		for ( int i = 0; i < maze.length; i++ ){
 			for ( int j = 0; j < maze[i].length; j++ ){
@@ -201,9 +231,9 @@ public class PacPanel extends JPanel implements KeyListener {
 			JOptionPane.showMessageDialog(null, null, "GAMEOVER", JOptionPane.INFORMATION_MESSAGE, Gameover);
 			estado = true;
 	        frame.setSize(1150, 650);
-			remove(frame.lives);
-			remove(frame.score);
-			remove(frame.pacdots);
+			remove(lives);
+			remove(score);
+			remove(pacdots);
 	        frame.ButtonsFunctions();
 	        frame.setLocationRelativeTo(null);
 		}
