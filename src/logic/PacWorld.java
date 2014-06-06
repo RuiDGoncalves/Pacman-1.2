@@ -57,13 +57,13 @@ public class PacWorld {
 	
 	
 	//Faz display da matriz de jogo original
-	public void DisplayPacworld(char maze[][])
+	public void DisplayPacworld()
 	{
-		for ( int i = 0; i < maze.length; i++ ){
-			for( int j = 0; j < maze[i].length; j++ ){
-				System.out.print(maze[i][j]);
+		for ( int i = 0; i < pacmaze.length; i++ ){
+			for( int j = 0; j < pacmaze[i].length; j++ ){
+				System.out.print(pacmaze[i][j]);
 
-				if ( j != ( maze[i].length - 1) )
+				if ( j != ( pacmaze[i].length - 1) )
 					System.out.print(" ");
 			}
 			System.out.println("");
@@ -139,18 +139,23 @@ public class PacWorld {
 			break;
 		}
 		
-		if ( pacmaze[ghost.column+x][ghost.line+y] == 'D' ){
-			pacmaze[ghost.column][ghost.line] = 'D';
-			pacmaze[ghost.column+x][ghost.line+y] = ghost.symbol;
-			ghost.MoveObject(x, y);
-		}
+		while ( pacmaze[ghost.column+x][ghost.line+y] != 'X' || pacmaze[ghost.column+x][ghost.line+y] != 'N'){
+			
+			if ( pacmaze[ghost.column+x][ghost.line+y] == 'D' ){
+				pacmaze[ghost.column][ghost.line] = 'D';
+				pacmaze[ghost.column+x][ghost.line+y] = ghost.symbol;
+				ghost.MoveObject(x, y);
+			}
 
-		else if ( pacmaze[ghost.column+x][ghost.line+y] == ' ' ){
-			pacmaze[ghost.column][ghost.line] = ' ';
-			pacmaze[ghost.column+x][ghost.line+y] = ghost.symbol;
-			ghost.MoveObject(x, y);
-		}
-		else if ( pacmaze[ghost.column+x][ghost.line+y] == 'N' ){
+			else if ( pacmaze[ghost.column+x][ghost.line+y] == ' ' ){
+				pacmaze[ghost.column][ghost.line] = ' ';
+				pacmaze[ghost.column+x][ghost.line+y] = ghost.symbol;
+				ghost.MoveObject(x, y);
+			}
+			
+			else if ( pacmaze[ghost.column+x][ghost.line+y] == 'N' )
+			{}
+			
 		}
 	}
 
@@ -181,6 +186,7 @@ public class PacWorld {
 		return vidas;
 	}
 	
+	
 	//Contador de pacdots
 	public int PacdotCounter(char[][] maze){
 		
@@ -199,11 +205,11 @@ public class PacWorld {
 			
 	
 	//Esta é a funcao principal da classe. Recebe input do utilizador e efectua os movimentos necessarios
-	public char[][] PacPlay(){
+	public void PacPlay(){
 		
 		while ( SearchPacdot(pacmaze) == true ){
 			
-			DisplayPacworld(pacmaze);
+			DisplayPacworld();
 		
 			Scanner in = new Scanner(System.in);
 			System.out.println("Faz jogada: ");
@@ -237,9 +243,7 @@ public class PacWorld {
 			
 		}
 		
-		DisplayPacworld(pacmaze);
-		
-		return pacmaze;
+		DisplayPacworld();
 
 	}
 	

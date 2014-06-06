@@ -3,24 +3,25 @@ package gui;
 import logic.*;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 
 public class PacFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	public PacPanel panel;
 	public JButton play, options, exit;
+	public JLabel lives, score, pacdots;
+	
+	public PacWorld game = new PacWorld();
 	
 	public PacFrame(){		
 		
 		panel = new PacPanel(this);
+		
+		panel.SetLabels();
 		
 		setTitle("PacMan");
 		setSize(1150, 650);
@@ -35,6 +36,9 @@ public class PacFrame extends JFrame {
 		validate();
 				
 	}
+	
+	
+	
 	
 	
 	public void SetButtons(){		
@@ -70,7 +74,7 @@ public class PacFrame extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			panel.BeginGame();
-			setSize(730, 732); //width, height
+			setSize(730, 752); //width, height
 			panel.remove(play);
 			panel.remove(options);
 			panel.remove(exit);

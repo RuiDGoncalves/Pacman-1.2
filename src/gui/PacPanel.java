@@ -28,9 +28,10 @@ public class PacPanel extends JPanel implements KeyListener {
 	Image Pacman_Left;
 	Image Pacman_Down;
 	Image Ghost;
-	PacWorld game;
 	
+	PacWorld game;	
 	PacFrame frame;
+	
 	public JLabel lives, score, pacdots;
 	
 	int vidas = 3;
@@ -41,36 +42,17 @@ public class PacPanel extends JPanel implements KeyListener {
 		frame = pacframe;
 		estado = true;
 		game = new PacWorld();
+	
+		lives = new JLabel("LIVES: " + game.LifeCounter());
+		score = new JLabel("SCORE: "+ (game.PacdotCounter(game.pacmaze)));
+		pacdots = new JLabel("PACDOTS LEFT: ");
 		
 		LoadImages();
-		SetLabels();
+		
 		addKeyListener(this);
 		
-	}
+	}	
 	
-	
-	public void SetLabels(){
-		//lives = new JLabel("LIVES: ");
-		lives.setLocation(0, 0);
-		lives.setSize(100, 34);
-		lives.setHorizontalAlignment(0);
-		lives.setForeground(Color.RED);
-        add(lives);
-        
-        
-        score.setLocation(305, 0);
-        score.setSize(100, 34);
-        score.setHorizontalAlignment(0);
-        score.setForeground(Color.RED);
-        add(score);
-        
-        
-        pacdots.setLocation(565, 0);
-        pacdots.setSize(100, 34);
-        pacdots.setHorizontalAlignment(0);
-        pacdots.setForeground(Color.RED);
-        add(pacdots);
-	}
 	
 	//Funçao que carrega as imagens necessarias para o jogo
 	public void LoadImages(){
@@ -120,13 +102,31 @@ public class PacPanel extends JPanel implements KeyListener {
 		if ( estado )
 			g.drawImage(Wallpaper, 0,0 ,getWidth(),getHeight(), null);
 		
-		else {
+		else {			
 			PaintMaze(g2);
-			PaintObjects(g2);
-			lives = new JLabel("LIVES: " + game.LifeCounter());
-			score = new JLabel("SCORE: "+ (game.PacdotCounter(game.PacPlay()) * 100));
-			pacdots = new JLabel("PACDOTS LEFT: ");
+			PaintObjects(g2);			
 		}		
+	}
+	
+	public void SetLabels(){
+		//lives = new JLabel("LIVES: ");
+		lives.setLocation(0, 0);
+		lives.setSize(100, 24);
+		lives.setHorizontalAlignment(0);
+		lives.setForeground(Color.RED);        
+		add(lives);
+		
+        score.setLocation(305, 0);
+        score.setSize(100, 24);
+        score.setHorizontalAlignment(0);
+        score.setForeground(Color.RED);        
+        add(score);
+        
+        pacdots.setLocation(565, 0);
+        pacdots.setSize(100, 24);
+        pacdots.setHorizontalAlignment(0);
+        pacdots.setForeground(Color.RED);
+        add(pacdots);
 	}
 	
 	public void PaintImage(Graphics2D g2, int x, int y, char s){
@@ -158,7 +158,7 @@ public class PacPanel extends JPanel implements KeyListener {
 			break;
 		}
 
-		g2.drawImage(image, x * imageWidth, y * imageHeight, imageWidth, imageHeight, null);
+		g2.drawImage(image, x * imageWidth, (y * imageHeight) + (imageHeight - 10), imageWidth, imageHeight, null);
 
 	}
 	
@@ -166,7 +166,7 @@ public class PacPanel extends JPanel implements KeyListener {
 		
 		char maze[][] = game.pacmaze;
 		
-		for ( int i = 0; i < maze.length; i++ ){
+		for ( int i = 0; i < maze.length ; i++ ){
 			for ( int j = 0; j < maze[i].length; j++ ){
 					PaintImage(g2, j, i, maze[i][j]);
 			}
@@ -236,10 +236,10 @@ public class PacPanel extends JPanel implements KeyListener {
 			remove(pacdots);
 	        frame.ButtonsFunctions();
 	        frame.setLocationRelativeTo(null);
-		}
-		
-		validate();
-		repaint();		
+		}		
+				
+		validate();		
+		repaint();
 		
 	}
 
