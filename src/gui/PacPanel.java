@@ -32,7 +32,7 @@ public class PacPanel extends JPanel implements KeyListener {
 	PacWorld game;	
 	PacFrame frame;
 	
-	public JLabel lives, score, pacdots;
+	
 	
 	int vidas = 3;
 	boolean estado;
@@ -42,10 +42,6 @@ public class PacPanel extends JPanel implements KeyListener {
 		frame = pacframe;
 		estado = true;
 		game = new PacWorld();
-	
-		lives = new JLabel("LIVES: " + game.LifeCounter());
-		score = new JLabel("SCORE: "+ (game.PacdotCounter(game.pacmaze)));
-		pacdots = new JLabel("PACDOTS LEFT: ");
 		
 		LoadImages();
 		
@@ -108,26 +104,7 @@ public class PacPanel extends JPanel implements KeyListener {
 		}		
 	}
 	
-	public void SetLabels(){
-		//lives = new JLabel("LIVES: ");
-		lives.setLocation(0, 0);
-		lives.setSize(100, 24);
-		lives.setHorizontalAlignment(0);
-		lives.setForeground(Color.RED);        
-		add(lives);
-		
-        score.setLocation(305, 0);
-        score.setSize(100, 24);
-        score.setHorizontalAlignment(0);
-        score.setForeground(Color.RED);        
-        add(score);
-        
-        pacdots.setLocation(565, 0);
-        pacdots.setSize(100, 24);
-        pacdots.setHorizontalAlignment(0);
-        pacdots.setForeground(Color.RED);
-        add(pacdots);
-	}
+	
 	
 	public void PaintImage(Graphics2D g2, int x, int y, char s){
 		
@@ -158,7 +135,7 @@ public class PacPanel extends JPanel implements KeyListener {
 			break;
 		}
 
-		g2.drawImage(image, x * imageWidth, (y * imageHeight) + (imageHeight - 10), imageWidth, imageHeight, null);
+		g2.drawImage(image, x * imageWidth, (y * imageHeight) + 20, imageWidth, imageHeight, null);
 
 	}
 	
@@ -227,13 +204,10 @@ public class PacPanel extends JPanel implements KeyListener {
 			vidas--;
 		}
 			
-		if ( game.SamePosition() &&  vidas == 0 ){
+		if ( game.SamePosition() ){
 			JOptionPane.showMessageDialog(null, null, "GAMEOVER", JOptionPane.INFORMATION_MESSAGE, Gameover);
 			estado = true;
 	        frame.setSize(1150, 650);
-			remove(lives);
-			remove(score);
-			remove(pacdots);
 	        frame.ButtonsFunctions();
 	        frame.setLocationRelativeTo(null);
 		}		
@@ -244,11 +218,11 @@ public class PacPanel extends JPanel implements KeyListener {
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {	
+	public void keyReleased(KeyEvent e) {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {	
+	public void keyTyped(KeyEvent e) {
 	}
 	
 	

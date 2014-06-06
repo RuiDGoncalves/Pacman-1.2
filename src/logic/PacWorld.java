@@ -139,7 +139,7 @@ public class PacWorld {
 			break;
 		}
 		
-		while ( pacmaze[ghost.column+x][ghost.line+y] != 'X' || pacmaze[ghost.column+x][ghost.line+y] != 'N'){
+		//while ( pacmaze[ghost.column+x][ghost.line+y] != 'X' || pacmaze[ghost.column+x][ghost.line+y] != 'N'){
 			
 			if ( pacmaze[ghost.column+x][ghost.line+y] == 'D' ){
 				pacmaze[ghost.column][ghost.line] = 'D';
@@ -153,10 +153,7 @@ public class PacWorld {
 				ghost.MoveObject(x, y);
 			}
 			
-			else if ( pacmaze[ghost.column+x][ghost.line+y] == 'N' )
-			{}
-			
-		}
+		//}
 	}
 
 	
