@@ -54,7 +54,8 @@ public class PacPanel extends JPanel implements KeyListener {
 	/**	
 	 * Construtor da classe
 	 * 
-	 * @param pacframe Janela de jogo*/
+	 * @param pacframe Janela de jogo
+	 */
 	public PacPanel(PacFrame pacframe){
 		
 		frame = pacframe;
@@ -112,6 +113,8 @@ public class PacPanel extends JPanel implements KeyListener {
 	
 	/**	
 	 * Metodo responsavel por pintar as imagens do jogo
+	 * 
+	 * @param g Componente a pintar
 	 */
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -129,7 +132,15 @@ public class PacPanel extends JPanel implements KeyListener {
 	
 	
 	/**	
-	 * Metodo que troca as os simbolos da parte logica por imagens 
+	 * Metodo que troca as os simbolos da parte logica por imagens
+	 * 
+	 * @param g2 Componente a pintar
+	 * 
+	 * @param x Valor de x do ponto onde se vai pintar o componente
+	 * 
+	 * @param y Valor de y do ponto onde se vai pintar o componente
+	 * 
+	 * @param s Simbolo a substituir
 	 */
 	public void PaintImage(Graphics2D g2, int x, int y, char s){
 		
@@ -166,7 +177,9 @@ public class PacPanel extends JPanel implements KeyListener {
 	
 	
 	/**	
-	 * Metodo que pinta o labirinto ainda sem os objetos (apenas as paredes e o chao) 
+	 * Metodo que pinta o labirinto ainda sem os objetos (apenas as paredes e o chao)
+	 *  
+	 * @param g2 Componente a pintar
 	 */
 	public void PaintMaze(Graphics2D g2){
 		
@@ -182,6 +195,8 @@ public class PacPanel extends JPanel implements KeyListener {
 	
 	/**	
 	 * Metodo que pinta os objetos no labirinto
+	 * 
+	 * @param g2 Componente a pintar
 	 */
 	public void PaintObjects(Graphics2D g2){
 		
@@ -211,6 +226,8 @@ public class PacPanel extends JPanel implements KeyListener {
 	 * Metodo responsavel pelo controlo do pacman atrave sdas teclas 
 	 * 
 	 * Se o pacman estiver na mesma posicao do fantasma, perde-se o jogo
+	 * 
+	 * @param e Tecla pressionada
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
