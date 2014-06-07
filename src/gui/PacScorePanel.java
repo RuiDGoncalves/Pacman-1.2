@@ -42,7 +42,7 @@ public class PacScorePanel extends JPanel {
 	
 	/** 
 	 * Metodo que coloca as labels nos locais corretos 
-	 * */
+	 */
 	public void SetLabels(){
 		//lives = new JLabel("LIVES: ");
 		lives.setLocation(0, 0);
