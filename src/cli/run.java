@@ -48,9 +48,7 @@ public class run {
 					x = 0;
 					y = 1;
 					break;
-			}
-			
-			
+			}			
 			
 			jogo.MoveGhost();
 			jogo.MovePacman(x, y);
