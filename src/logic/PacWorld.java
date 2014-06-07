@@ -3,16 +3,39 @@ package logic;
 import java.util.Random;
 import java.util.Scanner;
 
+/** 
+ * Classe principal da parte logica do jogo
+ * 
+ * Responsavel por criar e colocar os objetos no labirinto
+ * 
+ * Responsavel pelos movimentos do pacman e do fantasma
+ * 
+ */
 public class PacWorld {
+	/** Labirinto */
 	public char pacmaze[][];
+	
+	/** Objeto Pacman */
 	public PacMan pacman;
+	
+	/** Objecto Dots */
 	public PacDot dots;
+	
+	/** 4 Objetos que representam os Specialdots */
 	public PacSpecialDot lsd1, lsd2, lsd3, lsd4;
+	
+	/** Objeto Fantasma */
 	public PacGhost ghost;
 	
-	char[][] maze_temp;
-	public int dots_count;
+	/** Contadores de pacdots */
+	public int dots_countA, dots_countB;
 	
+	/** 
+	 * Contrutor da Classe
+	 * 
+	 * Cria o labirinto e coloca todos os objetos necessarios para o jogo
+	 * 
+	 */
 	public PacWorld(){
 		char maze[][] = {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' },
 						 {'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X' },
@@ -46,17 +69,19 @@ public class PacWorld {
 		lsd4 = new PacSpecialDot( pacmaze, 19, 19);
 		ghost = new PacGhost(pacmaze, 10, 7);
 		
-		SetPacdots(pacmaze);
 		lsd1.SetSymbol(pacmaze);
 		lsd2.SetSymbol(pacmaze);
 		lsd3.SetSymbol(pacmaze);
 		lsd4.SetSymbol(pacmaze);
+		SetPacdots(pacmaze);		
 		pacman.SetSymbol(pacmaze);
 		ghost.SetSymbol(pacmaze);
 	}
 	
 	
-	//Faz display da matriz de jogo original
+	/** 
+	 * Metodo Responsavel por imprimir o labirinto na consola
+	 */
 	public void DisplayPacworld()
 	{
 		for ( int i = 0; i < pacmaze.length; i++ ){
@@ -71,7 +96,12 @@ public class PacWorld {
 	}
 	
 	
-	//Troca todos os simbolos ' ' por pacdots
+	/**
+	 *  Troca todos os simbolos ' ' por pacdots
+	 *  
+	 *  @param maze Labirinto
+	 *  
+	 */
 	public void SetPacdots(char maze[][]){
 		for ( int i = 1; i < maze.length-1; i++ )
 		{
@@ -84,7 +114,12 @@ public class PacWorld {
 	}
 	
 	
-	//Procura a matriz por algum pacdot
+	/** 
+	 * Procura a matriz por algum pacdot
+	 * 
+	 * @param maze Labirinto
+	 * 
+	 */
 	public boolean SearchPacdot(char maze[][]){
 		for ( int i = 1; i < maze.length-1; i++ )
 		{
@@ -100,7 +135,14 @@ public class PacWorld {
 	
 	
 	
-	//Funcao responsavel pelo movimento do pacman
+	/** 
+	 * Metodo responsavel pelo movimento do pacman
+	 * 
+	 *  @param x Movimento realizado no sentido vertical
+	 *  
+	 *  @param y Movimento realizado no sentido horizontal
+	 *  
+	 */
 	public void MovePacman(int x, int y){
 		
 		if ( pacman.CheckWall(pacmaze, x, y) && pacman.CheckNFloor(pacmaze, x, y) ){
@@ -111,7 +153,9 @@ public class PacWorld {
 	}		
 		
 	
-	//Funcao responsavel pelo movimento do fantasma
+	/** 
+	 * Metodo responsavel pelo movimento do fantasma 
+	 */
 	public void MoveGhost(){
 		Random random = new Random();
 		int randNumber = random.nextInt(4) + 1;
@@ -138,8 +182,6 @@ public class PacWorld {
 			y = 0;
 			break;
 		}
-		
-		//while ( pacmaze[ghost.column+x][ghost.line+y] != 'X' || pacmaze[ghost.column+x][ghost.line+y] != 'N'){
 			
 			if ( pacmaze[ghost.column+x][ghost.line+y] == 'D' ){
 				pacmaze[ghost.column][ghost.line] = 'D';
@@ -153,11 +195,12 @@ public class PacWorld {
 				ghost.MoveObject(x, y);
 			}
 			
-		//}
 	}
 
 	
-	//Funcao que verifica se o Pacman e um fantasma estao na mesma posicao
+	/**
+	 * Metodo que verifica se o Pacman e um fantasma estao na mesma posicao 
+	 */
 	public boolean SamePosition(){
 		
 		if ( (pacman.column == ghost.column) && (pacman.line == ghost.line) )
@@ -168,11 +211,9 @@ public class PacWorld {
 	
 	
 	
-	//
-	//Contadores para as JLabels
-	//
-	
-	//Contador de vidas
+	/** 
+	 * Contador de vidas
+	 */
 	public int LifeCounter(){
 		
 		int vidas = 3;
@@ -184,24 +225,57 @@ public class PacWorld {
 	}
 	
 	
-	//Contador de pacdots
-	public int PacdotCounter(char[][] maze){
+	/** 
+	 * Contador de pacdots
+	 * 
+	 * Utilizado para saber o score 
+	 * 
+	 * @param maze Labirinto
+	 * 
+	 */
+	public int PacdotCounterA(char[][] maze){
 		
 		for ( int i = 1; i < maze.length-1; i++ )
 		{
 			for( int j = 1; j < maze[i].length-1; j++ )
 			{
 				if ( (maze[i][j] == dots.symbol) || (maze[i][j] == lsd1.symbol) )
-					dots_count++;
+					dots_countA++;
 			}		
 		}
 			
-		return dots_count;
+		return (172 - dots_countA);
+	}
+	
+	
+	/** 
+	 * Contador de pacdots
+	 * 
+	 * Utilizado para saber os pacdots restantes
+	 * 
+	 * @param maze Labirinto
+	 * 
+	 */
+	public int PacdotCounterB(char[][] maze){
+		
+		for ( int i = 1; i < maze.length-1; i++ )
+		{
+			for( int j = 1; j < maze[i].length-1; j++ )
+			{
+				if ( (maze[i][j] == dots.symbol) || (maze[i][j] == lsd1.symbol) )
+					dots_countB++;
+			}		
+		}
+			
+		return dots_countB;
 	}
 
 			
 	
-	//Esta é a funcao principal da classe. Recebe input do utilizador e efectua os movimentos necessarios
+	/** Metodo principal da classe.
+	 * 
+	 *  Recebe input do utilizador e efectua os movimentos necessarios e imprime o labirinto
+	 */
 	public void PacPlay(){
 		
 		while ( SearchPacdot(pacmaze) == true ){

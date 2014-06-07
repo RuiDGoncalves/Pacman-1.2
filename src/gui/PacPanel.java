@@ -11,9 +11,19 @@ import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
+/** 
+ * Classe do panel principal do jogo
+ *
+ * Responsavel pelas imagens, pelo controlo do pacman e pelo movimento dos objetos na GUI
+ */
 public class PacPanel extends JPanel implements KeyListener {
-
+	
+	/**	Default Serial Version ID */
 	private static final long serialVersionUID = 1L;
+	
+	/**	
+	 * Imagens utilizadas no jogo
+	 */
 	ImageIcon imageicon;
 	Image image;
 	ImageIcon Gameover;	
@@ -29,14 +39,22 @@ public class PacPanel extends JPanel implements KeyListener {
 	Image Pacman_Down;
 	Image Ghost;
 	
-	PacWorld game;	
+	/**	Objeto da classe PacWorld (parte logica) */
+	PacWorld game;
+	
+	/**	Objeto referente a janela de jogo */
 	PacFrame frame;
 	
-	
-	
+	/**	Numero inicial de vidas */
 	int vidas = 3;
+	
+	/**	Booleano que altera entre o menu principal e o jogo */
 	boolean estado;
 	
+	/**	
+	 * Construtor da classe
+	 * 
+	 * @param pacframe Janela de jogo*/
 	public PacPanel(PacFrame pacframe){
 		
 		frame = pacframe;
@@ -50,7 +68,9 @@ public class PacPanel extends JPanel implements KeyListener {
 	}	
 	
 	
-	//Funçao que carrega as imagens necessarias para o jogo
+	/**	
+	 * Funçao que carrega as imagens necessarias para o jogo 
+	 */
 	public void LoadImages(){
 		
 		imageicon = new ImageIcon(this.getClass().getResource("/images/wallpaper.jpg"));
@@ -90,6 +110,9 @@ public class PacPanel extends JPanel implements KeyListener {
 		
 	}
 	
+	/**	
+	 * Metodo responsavel por pintar as imagens do jogo
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponents(g);
@@ -105,7 +128,9 @@ public class PacPanel extends JPanel implements KeyListener {
 	}
 	
 	
-	
+	/**	
+	 * Metodo que troca as os simbolos da parte logica por imagens 
+	 */
 	public void PaintImage(Graphics2D g2, int x, int y, char s){
 		
 		int imageWidth = (getWidth() / game.pacmaze.length);
@@ -139,6 +164,10 @@ public class PacPanel extends JPanel implements KeyListener {
 
 	}
 	
+	
+	/**	
+	 * Metodo que pinta o labirinto ainda sem os objetos (apenas as paredes e o chao) 
+	 */
 	public void PaintMaze(Graphics2D g2){
 		
 		char maze[][] = game.pacmaze;
@@ -150,6 +179,10 @@ public class PacPanel extends JPanel implements KeyListener {
 		}
 	}
 	
+	
+	/**	
+	 * Metodo que pinta os objetos no labirinto
+	 */
 	public void PaintObjects(Graphics2D g2){
 		
 		char maze[][] = game.pacmaze;
@@ -173,6 +206,12 @@ public class PacPanel extends JPanel implements KeyListener {
 		}
 	}
 	
+	
+	/**	
+	 * Metodo responsavel pelo controlo do pacman atrave sdas teclas 
+	 * 
+	 * Se o pacman estiver na mesma posicao do fantasma, perde-se o jogo
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
@@ -226,7 +265,9 @@ public class PacPanel extends JPanel implements KeyListener {
 	}
 	
 	
-	//Funcao que muda o Wallpaper inicial para o jogo.
+	/**	
+	 * Metodo que muda o Wallpaper inicial para o jogo. 
+	 */
 	public void BeginGame(){
 		estado = false;
 		repaint();

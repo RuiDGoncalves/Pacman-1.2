@@ -9,16 +9,29 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+/**	
+ * Classe que cria a janela de jogo e coloca os panels necessarios
+ */
 public class PacFrame extends JFrame {
 
+	/**	Default Serial Version ID */
 	private static final long serialVersionUID = 1L;
-	public PacPanel panel;
-	public PacScorePanel scorepanel;
-	public JButton play, options, exit;
-	public JLabel lives, score, pacdots;
 	
+	/**	Objeto do panel principal */
+	public PacPanel panel;
+	
+	/**	Objeto do panel com as labels */
+	public PacScorePanel scorepanel;
+	
+	/**	3 Botoes necessarios no menu principal */
+	public JButton play, options, exit;
+	
+	/**	Objeto da classe Pacworld (parte logica) */
 	public PacWorld game = new PacWorld();
 	
+	/**	
+	 * Construtor da Classe
+	 */
 	public PacFrame(){		
 		
 		panel = new PacPanel(this);
@@ -41,7 +54,9 @@ public class PacFrame extends JFrame {
 	}
 		
 	
-	
+	/**	
+	 * Metodo que inicializa e coloca o local certo os botoes 
+	 */
 	public void SetButtons(){		
 		play = new JButton("Play");
 		play.setBounds(420, 74, 150, 50);
@@ -60,17 +75,22 @@ public class PacFrame extends JFrame {
 	}
 	
 	
+	/**	
+	 * Metodo que controla as funcoes de cada botao
+	 */
 	public void ButtonsFunctions(){
 		SetButtons();		
 		play.addActionListener(new BPlay());
+		exit.addActionListener(new BExit());
 		panel.add(play);
 		panel.add(options);
-		panel.add(exit);
-		
+		panel.add(exit);		
 	}	
 
 
-	//Classe utilizada para definir a açao exucutada pelo botao New Game
+	/**	
+	 * Classe utilizada para definir a açao exucutada pelo botao Play
+	 */
 	public class BPlay implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
@@ -81,7 +101,19 @@ public class PacFrame extends JFrame {
 			panel.remove(exit);
 			
 			add(scorepanel);
-			add(panel);			
+			add(panel);
+			repaint();
+		}
+	}
+	
+	
+	/**	
+	 * Classe utilizada para definir a açao exucutada pelo botao Exit
+	 */
+	public class BExit implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
 		}
 	}
 
