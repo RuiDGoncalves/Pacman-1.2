@@ -269,54 +269,6 @@ public class PacWorld {
 			
 		return dots_countB;
 	}
-
-			
-	
-	/** Metodo principal da classe.
-	 * 
-	 *  Recebe input do utilizador e efectua os movimentos necessarios e imprime o labirinto
-	 */
-	public void PacPlay(){
-		
-		while ( SearchPacdot(pacmaze) == true ){
-			
-			DisplayPacworld();
-		
-			Scanner in = new Scanner(System.in);
-			System.out.println("Faz jogada: ");
-			char tecla = in.nextLine().charAt(0);
-			
-			int x = 0;
-			int y = 0;
-		
-			switch (tecla)
-			{
-				case 'w':
-					x = -1;
-					y = 0;
-					break;
-				case 's':
-					x = 1;
-					y = 0;
-					break;
-				case 'a':
-					x = 0;
-					y = -1;
-					break;
-				case 'd':
-					x = 0;
-					y = 1;
-					break;
-			}
-			
-			MoveGhost();
-			MovePacman(x, y);
-			
-		}
-		
-		DisplayPacworld();
-
-	}
 	
 }
 
