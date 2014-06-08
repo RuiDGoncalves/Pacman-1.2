@@ -9,10 +9,10 @@ public class PacObject {
 	public char symbol;
 	
 	/** Numero da linha do objeto */
-	int line;
+	public int line;
 	
 	/** Numero da coluna do objeto */
-	int column;
+	public int column;
 	
 	
 	/** 
