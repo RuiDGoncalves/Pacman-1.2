@@ -45,6 +45,9 @@ public class PacPanel extends JPanel implements KeyListener {
 	/**	Objeto referente a janela de jogo */
 	PacFrame frame;
 	
+	/**	Objeto do panel com as labels */
+	public PacScorePanel scorepanel;
+	
 	/**	Numero inicial de vidas */
 	int vidas = 3;
 	
@@ -266,6 +269,7 @@ public class PacPanel extends JPanel implements KeyListener {
 	        frame.setSize(1150, 650);
 	        frame.ButtonsFunctions();
 	        frame.setLocationRelativeTo(null);
+	        frame.getContentPane().remove(scorepanel);
 		}	
 		
 		else if ( game.SamePosition() && (game.SearchSpecialDots(game.pacmaze)) ) {
@@ -274,9 +278,10 @@ public class PacPanel extends JPanel implements KeyListener {
 	        frame.setSize(1150, 650);
 	        frame.ButtonsFunctions();
 	        frame.setLocationRelativeTo(null);
+	        frame.getContentPane().remove(scorepanel);
 		}
 				
-		validate();		
+		validate();
 		repaint();
 		
 	}
