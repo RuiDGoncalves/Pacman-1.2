@@ -260,13 +260,21 @@ public class PacPanel extends JPanel implements KeyListener {
 			vidas--;
 		}
 			
-		if ( game.SamePosition() ){
+		if ( game.SamePosition() && !(game.SearchSpecialDots(game.pacmaze)) ){
 			JOptionPane.showMessageDialog(null, null, "GAMEOVER", JOptionPane.INFORMATION_MESSAGE, Gameover);
 			estado = true;
 	        frame.setSize(1150, 650);
 	        frame.ButtonsFunctions();
 	        frame.setLocationRelativeTo(null);
-		}		
+		}	
+		
+		else if ( game.SamePosition() && (game.SearchSpecialDots(game.pacmaze)) ) {
+			JOptionPane.showMessageDialog(null, null, "YOU WON", JOptionPane.INFORMATION_MESSAGE, Gameover);
+			estado = true;
+	        frame.setSize(1150, 650);
+	        frame.ButtonsFunctions();
+	        frame.setLocationRelativeTo(null);
+		}
 				
 		validate();		
 		repaint();

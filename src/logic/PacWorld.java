@@ -28,7 +28,7 @@ public class PacWorld {
 	public PacGhost ghost;
 	
 	/** Contadores de pacdots */
-	public int dots_countA, dots_countB;
+	public int dots_countA, dots_countB, specialdots_count;
 	
 	/** 
 	 * Contrutor da Classe
@@ -210,6 +210,26 @@ public class PacWorld {
 	}
 	
 	
+	/**
+	 * Procura a matriz por specialpacdots
+	 * 
+	 * Se houver menos de 4 specialpacdots, retorna true
+	 */
+	public boolean SearchSpecialDots(char[][] maze){
+		
+		for ( int i = 1; i < maze.length-1; i++ )
+		{
+			for( int j = 1; j < maze[i].length-1; j++ )
+			{
+				if ( SpecialDotCounter(maze) <= 3 )
+					return true;
+			}		
+		}
+			
+		return false;
+	}
+	
+	
 	
 	/** 
 	 * Contador de vidas
@@ -268,6 +288,27 @@ public class PacWorld {
 		}
 			
 		return dots_countB;
+	}
+	
+	
+	/** 
+	 * Contador de specialdots 
+	 * 
+	 * @param maze Labirinto
+	 * 
+	 */
+	public int SpecialDotCounter(char[][] maze){
+				
+		for ( int i = 1; i < maze.length-1; i++ )
+		{
+			for( int j = 1; j < maze[i].length-1; j++ )
+			{
+				if ( maze[i][j] == lsd1.symbol )
+					specialdots_count++;
+			}		
+		}
+			
+		return specialdots_count;
 	}
 	
 }
